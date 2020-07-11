@@ -1,0 +1,104 @@
+<html>
+  <head>
+      <title>Shuffle and Sort</title> 
+      <link rel="stylesheet" href="style.css" />
+      <script src="jqueryv.3.5.1.js"></script>
+     
+      <script>
+        $( document ).ready(function() {
+          var grid = $('#grid');
+
+          for (var i = 1; i <= 9; i++) {
+          //var ranNum = Math.round( Math.random() * 65 );
+            grid.append('<div class="card card-'+ i + '">' + i + '</div>');
+          
+          }
+
+          $(".btn_shuffle").click(function() {
+            var cardNumbers = [];
+            
+            $('.card').each(function() {
+              cardNumbers.push(this.innerHTML);
+            });
+            
+            var theLength = cardNumbers.length - 1;
+            var toSwap;
+            var temp;
+            
+            for (var i = theLength; i > 0; i--) {
+              toSwap = Math.floor(Math.random() * (i + 1));
+              temp = cardNumbers[i];
+              cardNumbers[i] = cardNumbers[toSwap];
+              console.log(cardNumbers[i]);
+              cardNumbers[toSwap] = temp;
+            }
+            
+            i = 0;
+            
+            $('.card').each(function() {
+              this.innerHTML = cardNumbers[i];
+              i++;
+            });
+            // for (var i = 1; i <= 9; i++) {
+            //   $("card-"+ i).insertAfter();
+            //  }
+            /*var col = $(".card-" + i);
+
+            col.css({
+              'position' :'absolute',
+              'left': '0',
+              'margin-left': -(col.outerWidth() / 2) + 'px'
+            })
+            .animate({
+              'left':'0' ,
+              'margin-left': (col.outerWidth() + 20) + 'px',
+              'margin-top':  (col.outerWidth() + 10%) + 'px'
+            });
+            */   
+          });
+
+          $(".btn_sort").click(function() {
+            var cardNumbers = [];
+            
+            $('.card').each(function() {
+              cardNumbers.push(+this.innerHTML);
+            });
+            
+            cardNumbers.sort();
+            
+            i = 0;
+            
+            $('.card').each(function() {
+              this.innerHTML = cardNumbers[i];
+              i++;
+            });
+          });
+
+          //  $('.card').draggable({
+          //         start: function (event, ui) {
+          //             $(this).addClass('dragging');
+          //         }
+          //     });
+          //   $('.btn_shuffle').click(function (event) {
+          //         if ($(this).parent().hasClass('dragging')) {
+          //             $(this).parent().removeClass('dragging');
+          //         } else {
+          //             //alert("real click");
+          //             $("#content").toggle();
+          //         }
+          //     });
+
+
+          });
+      </script>
+      
+      
+  </head>
+  <body>
+    <button class="btn_shuffle" id="shuffle">Shuffle</button>
+    <button class="btn_sort">Sort</button>
+    <div class="wrapper">
+       <div id="grid"></div>
+    </div>
+  </body>
+</html>
